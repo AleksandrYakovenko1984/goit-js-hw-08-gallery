@@ -1,27 +1,40 @@
 import prod from "./prod.js";
-console.log(prod);
+import refs from "./refs.js"
+// console.log(prod);
+// console.log(refs);
+// доступ к хтмл элементам(деструктуризация)
+ const { list, modalDiv, img, closeBtn } = refs
+// console.log(list, modalDiv, img, closeBtn);
+    
+// разметка элемента списка
 
 function createItems(array) {
-  console.log(array);
-  const result = array.map((arr) => {
-    console.log(arr);
-    const { preview, original, descriptions } = arr
-    // console.log(preview, original, descriptions );
-    const item = <li class="gallery__item">
+  // console.log(array);
+  return array.map((arr) => {
+    
+    // console.log(arr);
+    const { description, original, preview } = arr
+    // console.log(description, original, preview);
+
+    return `<li class="gallery__item">
   <a
     class="gallery__link"
-    href="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg"
+    href=${original}
   >
     <img
       class="gallery__image"
-      src="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546__340.jpg"
-      data-source="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg"
-      alt="Tulips"
+      src=${preview}
+      data-source=${original}
+      alt=${description}
     />
   </a>
-    </li>
-    return item
-  })
-  return result
+</li>`
+    
+  }).join("")
+ 
+
 }
-createItems(prod)
+const markup = createItems(prod)
+console.log(markup);
+// встраивание разметки в список
+list.insertAdjacentHTML('afterbegin', markup)
