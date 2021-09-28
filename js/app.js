@@ -54,8 +54,9 @@ list.addEventListener('click', (e) => {
   if (condition) {
     showElement(modalDiv)
 
-      const modalImage = document.createElement('img')
-    const link = prod.find((object) => object.id === e.target.id).image
+    const modalContent = document.getElementsByClassName('lightbox__content')[0]
+    const modalImage = document.createElement('img')
+    const link = e.target.getAttribute('data-source');
     modalImage.setAttribute('src', link)
     console.log(modalImage)
 
@@ -69,6 +70,7 @@ list.addEventListener('click', (e) => {
 //   console.log(e.target.classList.contains('lightbox__overlay'));
 // })
 // по кнопке х
+
 closeBtn.addEventListener('click', () => {
   hideElement(modalDiv)
   // modalDiv.classList.remove('is-open')
@@ -80,6 +82,27 @@ window.addEventListener('keydown', (e) => {
     // modalDiv.classList.remove('is-open')
     hideElement(modalDiv)
   }
-  
 })
-// 
+
+const options = {
+  root: list,
+  rootMargin: '0px',
+  treshold: 0,
+
+}
+const observer = new IntersectionObserver(callback, options)
+
+function callback(entries) {
+  // console.log(entries);
+  entries.forEach((entry) => {
+    console.log(entry);
+    if (entry.isIntersectin) {
+      console.log(entry.target);
+      entry.target.img.remove('src')
+    }
+  })
+  
+}
+const items = [...list.children]
+console.log(items);
+items.forEach((item)=>observer.observe(item))

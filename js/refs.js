@@ -3,5 +3,5 @@ export default {
     modalDiv: document.querySelector('.lightbox'),
     img: document.querySelector('.lightbox__image'),
     closeBtn: document.querySelector('[data-action="close-lightbox"]'),
-
+// modalContent: document.querySelector('.content')
 }
